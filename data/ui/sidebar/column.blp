@@ -9,28 +9,31 @@ template $SidebarColumn : Box {
     Adw.HeaderBar headerbar {
       show-title: false;
 
-      ToggleButton account_button {
-        tooltip-text: _("Account");
-
-        Image account_button_image {}
-
-        styles [ "flat" ]
+       MenuButton add_button {
+        icon-name: "list-add-symbolic";
+        tooltip-text: _("Add Feed/Category/Tag");
+        always-show-arrow: true;
       }
 
       [end]
       MenuButton menu_button {
         icon-name: "open-menu-symbolic";
         tooltip-text: _("Main Menu");
-      }
-
-      [end]
-      MenuButton add_button {
-        icon-name: "list-add-symbolic";
-        tooltip-text: _("Add Feed/Category/Tag");
-        always-show-arrow: true;
+        menu-model: primary_menu;
       }
     }
 
     $SideBar sidebar {}
+  }
+}
+
+menu primary_menu {
+  section {
+    item ("Manage Accounts", "app.manage_accounts", "system-users-symbolic")
+    item ("Star on GitHub", "action")
+    item ("Settings", "app.preferences", "icon")
+  }
+  section {
+    item ("Quit", "app.quit", "icon")
   }
 }
