@@ -1,0 +1,36 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $SidebarColumn : Box {
+  orientation: vertical;
+
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar headerbar {
+      show-title: false;
+
+      ToggleButton account_button {
+        tooltip-text: _("Account");
+
+        Image account_button_image {}
+
+        styles [ "flat" ]
+      }
+
+      [end]
+      MenuButton menu_button {
+        icon-name: "open-menu-symbolic";
+        tooltip-text: _("Main Menu");
+      }
+
+      [end]
+      MenuButton add_button {
+        icon-name: "list-add-symbolic";
+        tooltip-text: _("Add Feed/Category/Tag");
+        always-show-arrow: true;
+      }
+    }
+
+    $SideBar sidebar {}
+  }
+}

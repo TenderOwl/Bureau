@@ -25,14 +25,12 @@
 
 from gi.repository import Gtk
 
-from bureau.components.sidebar.column import SidebarColumn
 
+@Gtk.Template(resource_path='/com/tenderowl/bureau/ui/sidebar/column.ui')
+class SidebarColumn(Gtk.Box):
+    __gtype_name__ = 'SidebarColumn'
 
-@Gtk.Template(resource_path='/com/tenderowl/bureau/ui/content_page.ui')
-class ContentPage(Gtk.Box):
-    __gtype_name__ = 'ContentPage'
-
-    sidebar_column: SidebarColumn = Gtk.Template.Child()
+    # label = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
