@@ -1,0 +1,6 @@
+data/com.tenderowl.bureau.desktop.in
+data/com.tenderowl.bureau.metainfo.xml.in
+data/com.tenderowl.bureau.gschema.xml
+src/main.py
+src/window.py
+src/window.ui

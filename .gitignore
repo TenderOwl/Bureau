@@ -1,0 +1,8 @@
+.idea
+.flatpak-builder/
+
+/subprojects/blueprint-compiler
+
+__pycache__
+*.local
+*.db
