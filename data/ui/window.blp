@@ -8,48 +8,14 @@ template $BureauWindow : Adw.ApplicationWindow {
   height-request: 360;
   title: _("Bureau");
 
-  content:
-  Adw.ToolbarView {
-    [top]
-    Adw.HeaderBar header_bar {
-      [end]
-      MenuButton {
-        primary: true;
-        icon-name: 'open-menu-symbolic';
-        tooltip-text: _('Menu');
-        menu-model: primary_menu;
-      }
-    }
-    content:
-    Label label {
-      label: 'Hello, World!';
+  Adw.NavigationView navigation_view {
 
-      styles [
-        "title-1",
-      ]
-    }
+    Adw.NavigationPage {
+      tag: "content_page";
+      title: _("NewsFlash");
+      can-pop: false;
 
-    ;
-  }
-
-  ;
-}
-
-menu primary_menu {
-  section {
-    item {
-      label: _('_Preferences');
-      action: 'app.preferences';
-    }
-
-    item {
-      label: _('_Keyboard Shortcuts');
-      action: 'win.show-help-overlay';
-    }
-
-    item {
-      label: _('_About Bureau');
-      action: 'app.about';
+      $ContentPage content_page {}
     }
   }
 }

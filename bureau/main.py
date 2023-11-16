@@ -23,21 +23,27 @@
 # SPDX-License-Identifier: MIT
 
 import sys
+
 import gi
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
-from gi.repository import Gtk, Gio, Adw
+from gi.repository import Gio, Adw
 from .window import BureauWindow
 
 
 class BureauApplication(Adw.Application):
     """The main application singleton class."""
 
-    def __init__(self):
+    version: str
+
+    def __init__(self, version: str):
         super().__init__(application_id='com.tenderowl.bureau',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
+
+        self.version = version
+
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
         self.create_action('preferences', self.on_preferences_action)
@@ -58,8 +64,8 @@ class BureauApplication(Adw.Application):
         about = Adw.AboutWindow(transient_for=self.props.active_window,
                                 application_name='bureau',
                                 application_icon='com.tenderowl.bureau',
-                                developer_name='Andrey Maksimov',
-                                version='0.1.0',
+                                developer_name='TenderOwl',
+                                version=self.version or '0.1.0',
                                 developers=['Andrey Maksimov'],
                                 copyright='© 2023 Andrey Maksimov')
         about.present()
@@ -84,7 +90,7 @@ class BureauApplication(Adw.Application):
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
 
-def main(version):
+def main(version: str):
     """The application's entry point."""
-    app = BureauApplication()
+    app = BureauApplication(version)
     return app.run(sys.argv)

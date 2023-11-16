@@ -22,17 +22,15 @@
 #
 # SPDX-License-Identifier: MIT
 
-from gi.repository import Adw
+
 from gi.repository import Gtk
 
-from bureau.content_page import ContentPage
 
+@Gtk.Template(resource_path='/com/tenderowl/bureau/ui/content_page.ui')
+class ContentPage(Gtk.Box):
+    __gtype_name__ = 'ContentPage'
 
-@Gtk.Template(resource_path='/com/tenderowl/bureau/ui/window.ui')
-class BureauWindow(Adw.ApplicationWindow):
-    __gtype_name__ = 'BureauWindow'
-
-    content_page: ContentPage = Gtk.Template.Child()
+    # label = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

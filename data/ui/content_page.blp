@@ -1,0 +1,72 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ContentPage : Box {
+  Adw.ToastOverlay content_overlay {
+    hexpand: true;
+
+    Adw.BreakpointBin {
+      height-request: 400;
+      width-request: 360;
+
+      Adw.OverlaySplitView outer {
+        min-sidebar-width: 220;
+        max-sidebar-width: 350;
+        sidebar-width-fraction: 0.2;
+
+        sidebar: Adw.NavigationPage {
+          tag: "sidebar";
+          title: "sidebar";
+
+          $SidebarColumn sidebar_column {
+            styles ["custom-sidebar"]
+          }
+        };
+
+        Adw.NavigationPage {
+          tag: "inner";
+          title: "inner";
+          can-pop: false;
+
+          Adw.NavigationSplitView inner {
+            min-sidebar-width: 360;
+            max-sidebar-width: 600;
+            sidebar-width-fraction: 0.40;
+
+            sidebar: Adw.NavigationPage {
+              title: "Article List";
+              tag: "article_list";
+              can-pop: false;
+
+              $ArticleListColumn article_list_column {}
+            };
+
+            Adw.NavigationPage {
+              title: "Article View";
+              tag: "article_view";
+
+              $ArticleViewColumn articleview_column {}
+            }
+          }
+        }
+      }
+
+      Adw.Breakpoint {
+        condition ("max-width: 1000px")
+        setters {
+          outer.collapsed: true;
+          outer.max-sidebar-width: 300;
+        }
+      }
+
+      Adw.Breakpoint {
+        condition ("max-width: 666px")
+        setters {
+          outer.collapsed: true;
+          inner.collapsed: true;
+          outer.max-sidebar-width: 300;
+        }
+      }
+    }
+  }
+}
