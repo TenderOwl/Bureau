@@ -21,21 +21,33 @@
 # SOFTWARE.
 #
 # SPDX-License-Identifier: MIT
+import inject
 from gi.repository import Adw, Gio, GObject
 from gi.repository import Gtk
 
 from bureau.content_page import ContentPage
+from bureau.providers.db import DbProvider
 
 
 @Gtk.Template(resource_path='/com/tenderowl/bureau/ui/window.ui')
 class BureauWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'BureauWindow'
 
+    db_provider: DbProvider | None
+
     connectivity_banner: Adw.Banner = Gtk.Template.Child()
     content_page: ContentPage = Gtk.Template.Child()
 
-    def __init__(self, **kwargs):
+    @inject.autoparams()
+    def __init__(self, db_provider: DbProvider, **kwargs):
         super().__init__(**kwargs)
+
+        self.db_provider = db_provider
+        self.db_provider.connect('initialized', self._on_db_initialized)
 
         nm: Gio.NetworkMonitor = Gio.NetworkMonitor.get_default()
         nm.connect('network-changed', lambda x, y: self.connectivity_banner.set_revealed(not y))
+
+    def _on_db_initialized(self, sender: GObject.GObject = None):
+        print(sender)
+        print('Db Initialized')

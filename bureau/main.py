@@ -34,16 +34,18 @@ gi.require_version('Gom', '1.0')
 
 from gi.repository import Gio, Adw
 
-from .window import BureauWindow
 from bureau.providers.account import AccountProvider
 from bureau.providers.app_state import AppStateProvider
 from bureau.providers.imap import ImapProvider
+from bureau.providers.db import DbProvider
+from bureau.window import BureauWindow
 
 
 def configure_providers(binder: inject.Binder):
     binder.bind(ImapProvider, ImapProvider('imap.yandex.ru'))
     binder.bind(AccountProvider, AccountProvider())
     binder.bind(AppStateProvider, AppStateProvider())
+    binder.bind(DbProvider, DbProvider('bureau.db'))
 
 
 class BureauApplication(Adw.Application):
