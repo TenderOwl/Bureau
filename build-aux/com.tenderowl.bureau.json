@@ -28,6 +28,7 @@
     "modules" : [
     	"python3-inject.json",
         "gnome-online-accounts.json",
+        "gobject-data-mapper.json",
     	"python3-imapclient.json",
         {
             "name" : "bureau",
