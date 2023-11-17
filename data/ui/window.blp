@@ -8,14 +8,23 @@ template $BureauWindow : Adw.ApplicationWindow {
   height-request: 360;
   title: _("Bureau");
 
-  Adw.NavigationView navigation_view {
+  Box {
+    orientation: vertical;
 
-    Adw.NavigationPage {
-      tag: "content_page";
-      title: _("NewsFlash");
-      can-pop: false;
+    Adw.NavigationView navigation_view {
 
-      $ContentPage content_page {}
+      Adw.NavigationPage {
+        tag: "content_page";
+        title: _("NewsFlash");
+        can-pop: false;
+
+        $ContentPage content_page {}
+      }
+    }
+
+    Adw.Banner connectivity_banner {
+      revealed: false;
+      title: _("Network unavailable");
     }
   }
 }

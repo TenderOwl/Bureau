@@ -21,7 +21,7 @@
 # SOFTWARE.
 #
 # SPDX-License-Identifier: MIT
-from gi.repository import Adw
+from gi.repository import Adw, Gio, GObject
 from gi.repository import Gtk
 
 from bureau.content_page import ContentPage
@@ -31,7 +31,11 @@ from bureau.content_page import ContentPage
 class BureauWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'BureauWindow'
 
+    connectivity_banner: Adw.Banner = Gtk.Template.Child()
     content_page: ContentPage = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        nm: Gio.NetworkMonitor = Gio.NetworkMonitor.get_default()
+        nm.connect('network-changed', lambda x, y: self.connectivity_banner.set_revealed(not y))
