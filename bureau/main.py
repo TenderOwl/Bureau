@@ -35,12 +35,14 @@ from gi.repository import Gio, Adw
 
 from .window import BureauWindow
 from bureau.providers.account import AccountProvider
+from bureau.providers.app_state import AppStateProvider
 from bureau.providers.imap import ImapProvider
 
 
 def configure_providers(binder: inject.Binder):
     binder.bind(ImapProvider, ImapProvider('imap.yandex.ru'))
     binder.bind(AccountProvider, AccountProvider())
+    binder.bind(AppStateProvider, AppStateProvider())
 
 
 class BureauApplication(Adw.Application):
@@ -74,12 +76,12 @@ class BureauApplication(Adw.Application):
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(transient_for=self.props.active_window,
-                                application_name='bureau',
+                                application_name='Bureau',
                                 application_icon='com.tenderowl.bureau',
                                 developer_name='TenderOwl',
                                 version=self.version or '0.1.0',
                                 developers=['Andrey Maksimov'],
-                                copyright='© 2023 Andrey Maksimov')
+                                copyright='© 2023 TenderOwl')
         about.present()
 
     def on_preferences_action(self, widget, _):

@@ -30,7 +30,7 @@ template $ContentPage : Box {
 
           Adw.NavigationSplitView inner {
             min-sidebar-width: 360;
-            max-sidebar-width: 600;
+            max-sidebar-width: 500;
             sidebar-width-fraction: 0.40;
 
             sidebar: Adw.NavigationPage {
@@ -43,6 +43,12 @@ template $ContentPage : Box {
                 [top]
                 Adw.HeaderBar {
                   show-title: false;
+
+                  ToggleButton toggle_sidebar_btn {
+                    icon-name: "sidebar-show-symbolic";
+                    tooltip-text: "Toggle Sidebar";
+                    visible: false;
+                  }
                 }
               }
             };

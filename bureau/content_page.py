@@ -21,18 +21,36 @@
 # SOFTWARE.
 #
 # SPDX-License-Identifier: MIT
-
-
-from gi.repository import Gtk
+import inject
+from gi.repository import Gtk, GObject, Adw
 
 from bureau.components.sidebar.column import SidebarColumn
+from bureau.providers.app_state import AppStateProvider
 
 
 @Gtk.Template(resource_path='/com/tenderowl/bureau/ui/content_page.ui')
 class ContentPage(Gtk.Box):
     __gtype_name__ = 'ContentPage'
 
+    outer: Adw.OverlaySplitView = Gtk.Template.Child()
     sidebar_column: SidebarColumn = Gtk.Template.Child()
+    toggle_sidebar_btn: Gtk.ToggleButton = Gtk.Template.Child()
 
-    def __init__(self, **kwargs):
+    app_state: AppStateProvider
+
+    @inject.autoparams()
+    def __init__(self, app_state: AppStateProvider, **kwargs):
         super().__init__(**kwargs)
+        self.app_state = app_state
+
+        self.app_state.bind_property('sidebar_collapsed', self.outer, 'collapsed', GObject.BindingFlags.BIDIRECTIONAL)
+        self.toggle_sidebar_btn.bind_property('visible', self.app_state, 'sidebar_collapsed',
+                                              GObject.BindingFlags.BIDIRECTIONAL)
+        self.toggle_sidebar_btn.bind_property('active', self.outer, 'show-sidebar', GObject.BindingFlags.BIDIRECTIONAL)
+        # self.sidebar_column.connect('notify::show-sidebar', self._on_sidebar_collapsed)
+
+    # @Gtk.Template.Callback()
+    # def _on_sidebar_collapsed(self, state: bool):
+    #     print('Collapsed ', state)
+    #     self.app_state.sidebar_collapsed = state
+    #     self.toggle_sidebar_btn.set_visible(state)
