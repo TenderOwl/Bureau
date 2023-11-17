@@ -1,0 +1,14 @@
+{
+    "name": "python3-inject",
+    "buildsystem": "simple",
+    "build-commands": [
+        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"inject\" --no-build-isolation"
+    ],
+    "sources": [
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/0a/d4/b812b4e7d826ce0d6ec38f03080a0118d68879ba06454275f410a02f3f21/inject-5.1.0-py2.py3-none-any.whl",
+            "sha256": "2375e4b3852eb9243e4f736c7c3a9ec723ad8765a23d16cb1e89c0ea425e1433"
+        }
+    ]
+}

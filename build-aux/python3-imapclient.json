@@ -1,0 +1,14 @@
+{
+    "name": "python3-imapclient",
+    "buildsystem": "simple",
+    "build-commands": [
+        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"imapclient\" --no-build-isolation"
+    ],
+    "sources": [
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/c6/74/11a144d35e0f36e34aa09c61847c54894b143f3700c26d9fe85d2c8632b2/IMAPClient-3.0.0-py2.py3-none-any.whl",
+            "sha256": "31ec03da31f82fb380fdc0c79a9c31272789b50680285ade6581338c17ad8bf3"
+        }
+    ]
+}

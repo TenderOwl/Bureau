@@ -9,7 +9,10 @@
         "--share=ipc",
         "--socket=fallback-x11",
         "--device=dri",
-        "--socket=wayland"
+        "--socket=wayland",
+        "--talk-name=org.gnome.OnlineAccounts",
+        "--talk-name=org.gnome.ControlCenter",
+        "--talk-name=org.gnome.Settings"
     ],
     "cleanup" : [
         "/include",
@@ -23,6 +26,9 @@
         "*.a"
     ],
     "modules" : [
+    	"python3-inject.json",
+        "gnome-online-accounts.json",
+    	"python3-imapclient.json",
         {
             "name" : "bureau",
             "builddir" : true,

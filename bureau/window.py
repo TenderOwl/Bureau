@@ -21,11 +21,13 @@
 # SOFTWARE.
 #
 # SPDX-License-Identifier: MIT
-
+import inject
 from gi.repository import Adw
+from gi.repository import Goa
 from gi.repository import Gtk
 
 from bureau.content_page import ContentPage
+from bureau.providers.imap import ImapProvider
 
 
 @Gtk.Template(resource_path='/com/tenderowl/bureau/ui/window.ui')
@@ -34,5 +36,21 @@ class BureauWindow(Adw.ApplicationWindow):
 
     content_page: ContentPage = Gtk.Template.Child()
 
-    def __init__(self, **kwargs):
+    @inject.autoparams()
+    def __init__(self, imap_provider: ImapProvider, **kwargs):
         super().__init__(**kwargs)
+
+        email_addresses = []
+
+        goa: Goa.Client = Goa.Client.new_sync(None)
+        accs = goa.get_accounts()
+        for acc in accs:
+            mail_proxy = acc.props.mail
+            if mail_proxy:
+                email_address = mail_proxy.props.email_address
+                if email_address:
+                    email_addresses.append(email_address)
+
+        print(email_addresses)
+
+        print(imap_provider)

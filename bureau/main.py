@@ -25,9 +25,13 @@
 import sys
 
 import gi
+import inject
+
+from bureau.providers.imap import ImapProvider
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
+gi.require_version('Goa', '1.0')
 
 from gi.repository import Gio, Adw
 from .window import BureauWindow
@@ -44,9 +48,14 @@ class BureauApplication(Adw.Application):
 
         self.version = version
 
+        inject.configure(self.configure_providers)
+
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
         self.create_action('preferences', self.on_preferences_action)
+
+    def configure_providers(self, binder: inject.Binder):
+        binder.bind(ImapProvider, ImapProvider('imap.yandex.ru'))
 
     def do_activate(self):
         """Called when the application is activated.
