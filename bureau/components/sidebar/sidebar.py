@@ -21,16 +21,29 @@
 # SOFTWARE.
 #
 # SPDX-License-Identifier: MIT
-
-
+import inject
 from gi.repository import Gtk
+
+from bureau.providers.account_provider import AccountProvider
 
 
 @Gtk.Template(resource_path='/com/tenderowl/bureau/ui/sidebar/sidebar.ui')
 class SideBar(Gtk.Box):
     __gtype_name__ = 'SideBar'
 
-    # label = Gtk.Template.Child()
+    account_provider: AccountProvider
 
-    def __init__(self, **kwargs):
+    accounts_list: Gtk.ListBox = Gtk.Template.Child()
+
+    @inject.autoparams()
+    def __init__(self, account_provider: AccountProvider, **kwargs):
         super().__init__(**kwargs)
+
+        accounts = account_provider.get_accounts()
+        for account in accounts:
+            account_row = Gtk.Label(label=account,
+                                    margin_start=8, margin_end=8, margin_top=4, margin_bottom=4,
+                                    halign=Gtk.Align.START,
+                                    )
+            account_row.add_css_class('heading')
+            self.accounts_list.append(account_row)

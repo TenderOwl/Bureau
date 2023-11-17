@@ -17,32 +17,38 @@ template $SideBar : Box {
       Box {
         orientation: vertical;
 
-        ListBox all_articles_fake_list {
-          margin-top: 10;
+        ListBox accounts_list {
+          margin-bottom: 10;
           selection-mode: single;
 
-          ListBoxRow all_articles_row {
+          ListBoxRow inbox_row {
             Box {
-              spacing: 2;
+              spacing: 8;
 
-              Label {
-                hexpand: true;
-                halign: start;
-                label: _("All Articles");
-
-                styles [
-                  "heading",
-                ]
+              Image {
+                icon-name: "mail-unread-symbolic";
               }
 
-              Label item_count_all_label {
-                width-request: 24;
-                valign: center;
-                label: "0";
+              Label {
+                label: _("Inbox");
+                styles ["heading"]
 
-                styles [
-                  "item-count",
-                ]
+              }
+            }
+          }
+
+          ListBoxRow draft_row {
+            Box {
+              spacing: 8;
+
+              Image {
+                icon-name: "text-editor-symbolic";
+              }
+
+              Label {
+                label: _("Drafts");
+                styles ["heading"]
+
               }
             }
           }
@@ -51,103 +57,6 @@ template $SideBar : Box {
             "navigation-sidebar",
           ]
         }
-
-        Box categories {
-          orientation: vertical;
-
-          Box categories_event_box {
-            height-request: 25;
-            margin-top: 15;
-            spacing: 5;
-
-            EventControllerMotion categories_motion {
-            }
-
-            GestureClick categories_click {
-              button: 1;
-            }
-
-            Label {
-              margin-start: 16;
-              hexpand: true;
-              halign: start;
-              label: _("Subscriptions");
-
-              styles [
-                "dim-label",
-                "caption-heading",
-              ]
-            }
-
-            [end]
-            Image categories_expander {
-              width-request: 24;
-              height-request: 24;
-              margin-end: 13;
-              icon-name: "go-previous-symbolic";
-              opacity: 0.5;
-
-              styles [
-                "symbolic",
-                "backward-arrow-expanded",
-              ]
-            }
-          }
-
-          Revealer categories_revealer {
-            reveal-child: true;
-            // child: $FeedList feed_list {};
-          }
-        }
-
-        Box tags_box {
-          orientation: vertical;
-
-          Box tags_event_box {
-            height-request: 25;
-            margin-top: 10;
-            spacing: 5;
-
-            Label {
-              margin-start: 16;
-              hexpand: true;
-              halign: start;
-              label: _("Tags");
-
-              styles [
-                "dim-label",
-                "caption-heading",
-              ]
-            }
-
-            [end]
-            Image tags_expander {
-              margin-end: 13;
-              width-request: 24;
-              height-request: 24;
-              icon-name: "go-previous-symbolic";
-              opacity: 0.5;
-
-              styles [
-                "symbolic",
-                "backward-arrow-expanded",
-              ]
-            }
-
-            EventControllerMotion tags_motion {
-            }
-
-            GestureClick tags_click {
-              button: 1;
-            }
-          }
-
-          Revealer tags_revealer {
-            reveal-child: true;
-            // child: $TagList tag_list {};
-          }
-        }
-
       }
     }
   }

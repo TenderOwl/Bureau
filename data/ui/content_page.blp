@@ -39,6 +39,12 @@ template $ContentPage : Box {
               can-pop: false;
 
               // $ArticleListColumn article_list_column {}
+              Adw.ToolbarView {
+                [top]
+                Adw.HeaderBar {
+                  show-title: false;
+                }
+              }
             };
 
             Adw.NavigationPage {
@@ -46,6 +52,12 @@ template $ContentPage : Box {
               tag: "article_view";
 
               // $ArticleViewColumn articleview_column {}
+              Adw.ToolbarView {
+                [top]
+                Adw.HeaderBar {
+                  show-title: false;
+                }
+              }
             }
           }
         }
@@ -60,7 +72,7 @@ template $ContentPage : Box {
       }
 
       Adw.Breakpoint {
-        condition ("max-width: 666px")
+        condition ("max-width: 500px")
         setters {
           outer.collapsed: true;
           inner.collapsed: true;
