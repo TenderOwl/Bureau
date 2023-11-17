@@ -24,7 +24,7 @@
 import inject
 from gi.repository import Gtk
 
-from bureau.providers.account_provider import AccountProvider
+from bureau.providers.account import AccountProvider
 
 
 @Gtk.Template(resource_path='/com/tenderowl/bureau/ui/sidebar/sidebar.ui')

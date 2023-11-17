@@ -34,7 +34,7 @@ gi.require_version('Goa', '1.0')
 from gi.repository import Gio, Adw
 
 from .window import BureauWindow
-from bureau.providers.account_provider import AccountProvider
+from bureau.providers.account import AccountProvider
 from bureau.providers.imap import ImapProvider
 
 
