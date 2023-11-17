@@ -1,3 +1,4 @@
+from fastlog import log
 from gi.repository import GObject
 from imapclient import IMAPClient
 
@@ -26,5 +27,6 @@ class ImapProvider(GObject.GObject):
             return
 
         folders = self.server.list_folders(directory, pattern)
-        print('FOLDERS:')
-        print(folders)
+        log.debug('FOLDERS:')
+        with log.indent():
+            [log.debug(folder) for folder in folders]

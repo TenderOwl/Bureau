@@ -1,5 +1,6 @@
 from typing import Any
 
+from fastlog import log
 from gi.repository import GObject, Gio
 from gi.repository import Gom
 
@@ -26,13 +27,15 @@ class DbProvider(GObject.GObject):
         self.adapter = Gom.Adapter()
         self.adapter.open_async(uri, self._on_open)
 
-    def _on_open(self, source_object: GObject.GObject, result: Gio.AsyncResult, data: Any = None):
+    def _on_open(self, _source_object: GObject.GObject,
+                 result: Gio.AsyncResult,
+                 _data: Any = None):
         try:
             if self.adapter.open_finish(result):
                 self.emit('open-done')
                 self.init_db()
         except Exception as e:
-            print('Failed to open database: ', e)
+            log.exception('Failed to open database: %s', e)
             self.emit('open-failed')
 
     def init_db(self):

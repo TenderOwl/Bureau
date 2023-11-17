@@ -26,6 +26,7 @@
         "*.a"
     ],
     "modules" : [
+        "python3-fastlog.json",
     	"python3-inject.json",
         "gnome-online-accounts.json",
         "gobject-data-mapper.json",

@@ -22,6 +22,7 @@
 #
 # SPDX-License-Identifier: MIT
 import inject
+from fastlog import log
 from gi.repository import Adw, Gio, GObject
 from gi.repository import Gtk
 
@@ -49,5 +50,4 @@ class BureauWindow(Adw.ApplicationWindow):
         nm.connect('network-changed', lambda x, y: self.connectivity_banner.set_revealed(not y))
 
     def _on_db_initialized(self, sender: GObject.GObject = None):
-        print(sender)
-        print('Db Initialized')
+        log.debug('Db Initialized')

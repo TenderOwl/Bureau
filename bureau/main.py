@@ -24,6 +24,9 @@
 
 import sys
 
+from fastlog import log
+log.setLevel(log.DEBUG)
+
 import gi
 import inject
 
@@ -46,6 +49,7 @@ def configure_providers(binder: inject.Binder):
     binder.bind(AccountProvider, AccountProvider())
     binder.bind(AppStateProvider, AppStateProvider())
     binder.bind(DbProvider, DbProvider('bureau.db'))
+    log.debug("providers initialized")
 
 
 class BureauApplication(Adw.Application):
@@ -89,7 +93,7 @@ class BureauApplication(Adw.Application):
 
     def on_preferences_action(self, widget, _):
         """Callback for the app.preferences action."""
-        print('app.preferences action activated')
+        log.debug('app.preferences action activated')
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.

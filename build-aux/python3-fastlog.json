@@ -1,0 +1,14 @@
+{
+    "name": "python3-fastlog",
+    "buildsystem": "simple",
+    "build-commands": [
+        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"fastlog\" --no-build-isolation"
+    ],
+    "sources": [
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/57/62/07d69ddfcd609e4f5ab128f18a6f87b4180e7fa96b6627d17225fb694954/fastlog-1.0.0b3-py2.py3-none-any.whl",
+            "sha256": "9c9edba27943dc9af4c6a286e22426fd069b4fc08e136b15ddb344d3935be44f"
+        }
+    ]
+}
